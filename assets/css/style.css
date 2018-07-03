@@ -1,0 +1,89 @@
+body {
+  max-width: 600px;
+  margin: 0 auto;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+button {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 100;
+  color: #4b4b4b;
+}
+
+h1 {
+  font-size: 48px;
+  margin-bottom: 40px;
+  background-color: greenyellow;
+  text-align: center;
+  padding: 20px;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  font-weight: 400;
+}
+
+p {
+  margin-bottom: 10px;
+  line-height: 20px;
+}
+
+.stats {
+  width: 100%;
+  /* margin-top: 20px; */
+  text-align: center;
+  background-color: greenyellow;
+  padding-right: 0px;
+  padding-left: 0px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+span {
+  display: inline-block;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+#status {
+  text-align: center;
+  height: 30px;
+  vertical-align: middle;
+  display: block;
+  text-align: center;
+  font-weight: 400;
+}
+
+#target,
+#counter,
+#wins,
+#losses {
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.crystals {
+  text-align: center;
+  /* background-color: greenyellow; */
+}
+
+.crystal {
+  margin: 20px;
+  max-width: 65px;
+  transition: all 0.3s ease 0s;
+  vertical-align: middle;
+}
+
+.crystal:hover {
+  transform: scale(1.5);
+}

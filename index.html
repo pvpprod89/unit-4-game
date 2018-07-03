@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Crystals Collector Game</title>
+  <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <script type="text/javascript" src="assets/javascript/game.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+  <h1>Crystals Collector Game!</h1>
+  <h2>How To Play</h2>
+  <hr>
+  <br>
+  <p>You will be given a random number at the start of the game.</p>
+  <p>There are four crystals below. By clicking on a crystal you will add a specific amount of points to your total score.</p>
+  <p>You win the game by matching your total score to the random number. You loose the game if your total score goes above the
+    random number.</p>
+  <p>The value of each crystal is hidden from you until you click on it.</p>
+  <p>Each time when the game starts, the game will change the value of each crystal.</p>
+  <br>
+  <hr>
+  <br>
+
+  <p id="status"></p>
+  <div class="stats">
+    <span>
+      <p>Your Target</p>
+      <p id="target"></p>
+    </span>
+    <span>
+      <p>Your Score:</p>
+      <p id="counter">0</p>
+    </span>
+    <span>
+      <p>Wins</p>
+      <p id="wins"></p>
+    </span>
+    <span>
+      <p>Losses</p>
+      <p id="losses"></p>
+    </span>
+  </div>
+
+  <div class="crystals">
+    <img id="0" class="crystal" src="assets/images/crystal1.jpg" value="crystal1">
+    <img id="1" class="crystal" src="assets/images/crystal2.jpg" value="crystal2">
+    <img id="2" class="crystal" src="assets/images/crystal3.jpg" value="crystal3">
+    <img id="3" class="crystal" src="assets/images/crystal4.jpg" value="crystal4">
+  </div>
+
+</body>
+
+<script>
+  counter = 0;
+  var wins = 0;
+  var losses = 0;
+  $("#wins").text(wins);
+  $("#losses").text(losses);
+
+  $(document).ready(function newGame() {
+    //Code for making computer choose the random target number between between 19 and 120
+    var minNumber = 19;
+    var maxNumber = 120;
+    var randomTarget =
+      Math.floor(Math.random() * (maxNumber - minNumber + 1)) + minNumber;
+    // var randomTarget = Math.floor(
+    //   Math.random() * (maxNumber - minNumber + 1) + minNumber
+    // );
+    console.log(randomTarget);
+    $("#target").text(randomTarget);
+
+    //Code for using while loop which will create an array of four numbers between 1 and 12 to assign to the crystals
+    var crystalArray = [];
+    while (crystalArray.length < 4) {
+      var randomCrystalNumber = Math.ceil(Math.random() * 12);
+      if (crystalArray.indexOf(randomCrystalNumber) > -1) continue;
+      crystalArray[crystalArray.length] = randomCrystalNumber;
+    }
+    console.log(crystalArray);
+
+    // Below code will assign random number between 1 and 12 to each of the 4 crystals
+    $(".crystal").click(function () {
+      var clickedImage = $(this).attr("id");
+      console.log(crystalArray[clickedImage]);
+
+      // Below code will addup clicked image numbers (this is the users total score)
+      var clickedValue = crystalArray[clickedImage];
+      counter += clickedValue;
+      console.log(counter);
+
+      $("#counter").text(counter);
+
+      // Code to alert, when a player wins or looses
+      if (randomTarget === counter) {
+        $("#status").text("You WON :)");
+        counter = 0;
+        ++wins;
+        $("#wins").text(wins);
+
+        // To remove the value of the crystal click event, we will use ".off", so that we can reassign a new value to it
+        // http://api.jquery.com/off/
+        $(".crystal").off();
+        newGame();
+
+      } else if (counter >= randomTarget) {
+        $("#status").text("YOU LOST :(");
+        counter = 0;
+        ++losses;
+        $("#losses").text(losses);
+
+        $(".crystal").off();
+        newGame();
+      }
+    });
+  });
+</script>
+
+
+</html>
